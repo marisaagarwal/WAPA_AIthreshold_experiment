@@ -19,24 +19,21 @@
 
 
 ## 2. Groom data
-
-    # # remove extra columns
-    # experiment_data %<>%
-    #     dplyr::select(-c(11:12,))
     
     # make confidence threshold a factor
-      experiment_data$confidence_threshold =
-        factor(experiment_data$confidence_threshold,
-               levels = c(50,75, 100))
+    experiment_data$confidence_threshold =
+      factor(experiment_data$confidence_threshold,
+             levels = c(50,75, 100))
     
-      str(experiment_data)
+    # check structure of data
+    str(experiment_data)
     
       
 ## 3. Add columns
     
     # proportion of AI annotations completed, then prop that were correct & wrong
     experiment_data %<>%
-        mutate(propAIannotations_confirmed = n_preconfirmed_annotations/n_annotations,
+        mutate(propannotations_byAI = n_preconfirmed_annotations/n_annotations,
                propAIannotations_wrong = n_preconfirmed_wrong / n_preconfirmed_annotations,
                propAIannotations_correct = 1 - propAIannotations_wrong)
 
